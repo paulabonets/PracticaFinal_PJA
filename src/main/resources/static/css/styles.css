@@ -1,0 +1,115 @@
+/* =====================
+   🎨 Global Styles
+===================== */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #141414;
+    color: #fff;
+}
+
+/* =====================
+   🔐 Login & Register Styles
+===================== */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.login-container {
+    max-width: 400px;
+    width: 100%;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.login-container h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.login-container input,
+.login-container select {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    background-color: #444;
+    color: white;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e50914;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    margin-bottom: 15px;
+}
+
+.login-container button:hover {
+    background-color: #b20610;
+}
+
+/* =====================
+   🔗 Action Buttons
+===================== */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.btn-back {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #444;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.btn-back:hover {
+    background-color: #555;
+}
+
+/* =====================
+   🔄 Error Messages
+===================== */
+#error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+/* =====================
+   📱 Responsive Design
+===================== */
+@media (max-width: 768px) {
+    .login-container {
+        max-width: 90%;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+}

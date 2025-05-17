@@ -96,4 +96,5 @@ public class User {
     public void setWishList(List<WishListItem> wishList) {
         this.wishList = wishList;
     }
+
 }
