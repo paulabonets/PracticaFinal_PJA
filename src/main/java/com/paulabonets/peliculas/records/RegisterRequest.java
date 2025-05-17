@@ -11,8 +11,5 @@ public record RegisterRequest(
         @NotBlank @Email
         String email,
         @NotBlank @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,}$")
-        String password,
-
-        @NotBlank
-        String rol
+        String password
 ) {}
