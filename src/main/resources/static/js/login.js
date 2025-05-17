@@ -3,48 +3,59 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log("✅ Script login.js cargado correctamente");
 
     const form = document.getElementById("login-form");
-    if (form) {
-        console.log("✅ Formulario encontrado");
+    const errorContainer = document.getElementById("error-message");
 
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            console.log("🔥 Evento submit capturado correctamente");
-
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-
-            console.log("📨 Datos capturados:", { email, password });
-
-            try {
-                const response = await fetch("http://localhost:8080/api/auth/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ email, password })
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log("🔑 Datos recibidos:", data);
-
-                    localStorage.setItem("token", data.token || "token_placeholder");
-                    localStorage.setItem("role", data.role || "USER");
-                    localStorage.setItem("email", email);
-
-                    alert(`Bienvenido, ${data.role}`);
-                    window.location.href = "./index.html";
-                } else {
-                    const errorMessage = await response.text();
-                    console.log("❌ Error en la autenticación:", response.status, errorMessage);
-                    document.getElementById("error-message").innerText = "Usuario o contraseña incorrectos.";
-                }
-            } catch (error) {
-                console.error("🚨 Error al iniciar sesión:", error);
-                document.getElementById("error-message").innerText = "Error en el servidor.";
-            }
-        });
-    } else {
+    if (!form) {
         console.error("🚨 El formulario no se encontró en el DOM");
+        return;
     }
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        console.log("🔥 Evento submit capturado correctamente");
+
+        const email = document.getElementById("email")?.value.trim();
+        const password = document.getElementById("password")?.value;
+
+        console.log("📨 Datos capturados:", { email, password });
+
+        if (!email || !password) {
+            errorContainer.innerText = "Por favor completá ambos campos.";
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:8080/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({ email, password })
+            });
+
+            const contentType = response.headers.get("content-type");
+            let data;
+
+            if (contentType && contentType.includes("application/json")) {
+                data = await response.json();
+            } else {
+                data = await response.text();
+            }
+
+            if (response.ok) {
+                console.log("🔑 Login exitoso:", data);
+
+                localStorage.setItem("email", email);
+
+                window.location.href = "./home.html";
+            } else {
+                console.warn("❌ Error en la autenticación:", data);
+                errorContainer.innerText = "Usuario o contraseña incorrectos.";
+            }
+        } catch (error) {
+            console.error("🚨 Error en la solicitud:", error);
+            errorContainer.innerText = "No se pudo conectar al servidor.";
+        }
+    });
 });
