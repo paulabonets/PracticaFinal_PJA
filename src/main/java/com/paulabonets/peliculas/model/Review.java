@@ -2,6 +2,7 @@ package com.paulabonets.peliculas.model;
 
 import com.paulabonets.peliculas.model.Content;
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
@@ -22,6 +23,16 @@ public class Review {
     private Integer stars;
     private String description;
     private LocalDate created_at;
+
+    public Review(User user, Content content, Integer stars, String description) {
+        this.user = user;
+        this.content = content;
+        this.stars = stars;
+        this.description = description;
+        this.created_at = LocalDate.now();
+    }
+
+    public Review() {}
 
     public Long getId() {
         return id;
