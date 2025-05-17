@@ -6,13 +6,19 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "app_user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String name;
+
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -23,6 +29,17 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<WishListItem> wishList;
+
+    @Column(unique = true)
+    private String session;
+
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
+    }
 
     public Long getId() {
         return id;
