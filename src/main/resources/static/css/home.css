@@ -1,0 +1,46 @@
+header {
+    width: 100%;
+}
+
+input#search {
+    width: 100%;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.7rem;
+}
+
+@media (min-width: 768px) {
+    input#search {
+        width: 40%;
+    }
+}
+
+body {
+    background-color: #000000;
+    color: white;
+}
+
+nav {
+    background-color: red;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    border-radius: 1.2rem;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+}
+
+nav ul li {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+li a {
+    all: unset;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    color: black;
+}
