@@ -63,4 +63,20 @@ public class AuthController {
         ));
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@CookieValue(value = "session", required = false) String session, HttpServletResponse response) {
+        if (session != null) {
+            userService.logout(session);
+        }
+
+        Cookie cookie = new Cookie("session", null);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        return ResponseEntity.ok("Closed session");
+    }
+
+
 }
