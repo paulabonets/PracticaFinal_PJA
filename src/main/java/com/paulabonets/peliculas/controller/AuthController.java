@@ -5,6 +5,7 @@ import com.paulabonets.peliculas.model.User;
 import com.paulabonets.peliculas.records.LoginRequest;
 import com.paulabonets.peliculas.records.RegisterRequest;
 import com.paulabonets.peliculas.service.UserService;
+import com.paulabonets.peliculas.util.SessionHelper;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import java.util.Map;
 public class AuthController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private SessionHelper sessionHelper;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request, HttpServletResponse response) {
@@ -43,4 +47,20 @@ public class AuthController {
 
         return ResponseEntity.ok("Login exitoso");
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<?> me(@CookieValue(value = "session", required = false) String session) {
+        if (session == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No active session");
+        }
+
+        User user = sessionHelper.getUserFromSession(session);
+
+        return ResponseEntity.ok(Map.of(
+                "email", user.getEmail(),
+                "name", user.getName(),
+                "rol", user.getRol().name()
+        ));
+    }
+
 }
