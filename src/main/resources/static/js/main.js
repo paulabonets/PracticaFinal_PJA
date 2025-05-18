@@ -1,77 +1,83 @@
-document.addEventListener("DOMContentLoaded", () => {
-    console.log(" Cargando contenido real de MooKFlix...");
+window.addEventListener("DOMContentLoaded", () => {
+    const { email, name, role } = getLoggedUser();
 
-    const API_URL = "http://localhost:8080/api/content";
+    console.log(`👤 Usuario autenticado: ${email}, Rol: ${role}`);
+    crearMenuNavegacion();
 
-    async function fetchContent(type) {
-        try {
-            const response = await fetch(`${API_URL}?type=${type}`);
-            if (!response.ok) throw new Error(`Error al obtener ${type}`);
-            return await response.json();
-        } catch (err) {
-            console.error(` ${type} error:`, err);
-            return [];
+    fetchContents();
+
+    if (role === "ADMIN") {
+        const adminPanel = document.createElement("div");
+        adminPanel.classList.add("admin-panel");
+        adminPanel.innerHTML = `
+            <button onclick="createContent()">Crear Contenido</button>
+            <button onclick="updateContent()">Actualizar Contenido</button>
+            <button onclick="deleteContent()">Eliminar Contenido</button>
+        `;
+        document.body.appendChild(adminPanel);
+    }
+});
+
+function crearMenuNavegacion() {
+    const nav = document.createElement("nav");
+    nav.classList.add("navbar");
+    nav.innerHTML = `
+        <a href="./index.html">Inicio</a>
+        <a href="./register.html">Registrar Usuario</a>
+        <a href="#" id="logout-btn">Cerrar Sesión</a>
+    `;
+    document.body.insertBefore(nav, document.body.firstChild);
+
+    document.getElementById("logout-btn").addEventListener("click", () => {
+        localStorage.clear();
+        window.location.href = "./login.html";
+    });
+}
+
+async function fetchContents() {
+    try {
+        const response = await fetch("http://localhost:8080/api/content");
+        if (response.ok) {
+            const data = await response.json();
+            displayContents(data);
+        } else {
+            console.error("❌ Error al obtener los contenidos:", response.status);
         }
     }
+}
 
-    function renderCards(items, containerId) {
-        const container = document.getElementById(containerId);
-        container.innerHTML = "";
-
-        items.forEach(item => {
-            const card = document.createElement("div");
-            card.className = "highlight-card";
-
-            // Parte delantera
-            const front = document.createElement("div");
-            front.className = "card-front";
-
-            const img = document.createElement("img");
-            img.src = item.imageUrl || "img/default.jpg";
-            img.alt = item.title;
-            img.onerror = () => img.style.display = "none";
-
-            const title = document.createElement("div");
-            title.textContent = item.title;
-
-            front.appendChild(img);
-            front.appendChild(title);
-
-            // Parte trasera
-            const back = document.createElement("div");
-            back.className = "card-back";
-
-            back.innerHTML = `
-                <h3>${item.title}</h3>
-                <p><strong>Género:</strong> ${item.genre || "N/A"}</p>
-                <p><strong>Descripción:</strong> ${item.description || "Sin descripción"}</p>
-                <p><strong>Fecha:</strong> ${item.release_date ? new Date(item.release_date).toLocaleDateString() : "N/A"}</p>
-            `;
-
-            card.appendChild(front);
-            card.appendChild(back);
-
-            card.addEventListener("click", () => {
-                card.classList.toggle("flipped");
-            });
-
-            container.appendChild(card);
+async function getLoggedUser() {
+    try {
+        const res = await fetch("http://localhost:8080/api/auth/me", {
+            method: "GET",
+            credentials: "include"
         });
+
+        if (!res.ok) {
+            window.location.href = "login.html";
+
+            return;
+        }
+
+        return await res.json();
+
+    } catch (error) {
+        console.error(error);
+        window.location.href = "login.html";
     }
+}
 
-    async function cargarContenido() {
-        const peliculas = await fetchContent("MOVIE");
-        const libros = await fetchContent("BOOK");
-
-        renderCards(peliculas, "movies-section");
-        renderCards(libros, "books-section");
-    }
-
-    cargarContenido();
-    document.getElementById("btn-movieflix").addEventListener("click", (e) => {
-        e.preventDefault();
-        document.querySelector(".section:nth-of-type(1)").style.display = "block"; // películas
-        document.querySelector(".section:nth-of-type(2)").style.display = "none";  // libros
+function displayContents(contents) {
+    const carousel = document.getElementById("content-carousel");
+    carousel.innerHTML = "";
+    contents.forEach(content => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.innerHTML = `
+            <h3>${content.title}</h3>
+            <p>${content.description || "Sin descripción"}</p>
+        `;
+        carousel.appendChild(card);
     });
 
     document.getElementById("btn-bookflix").addEventListener("click", (e) => {
@@ -87,4 +93,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-});
+};
