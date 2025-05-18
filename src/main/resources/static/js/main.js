@@ -1,23 +1,11 @@
 window.addEventListener("DOMContentLoaded", () => {
-    console.log("✅ Script main.js cargado correctamente");
-
-    // Comprobación de autenticación
-    const email = localStorage.getItem("email");
-    const role = localStorage.getItem("role");
-
-    if (!email) {
-        console.log("🚫 Usuario no autenticado, redirigiendo a login");
-        window.location.href = "./login.html";
-        return;
-    }
+    const { email, name, role } = getLoggedUser();
 
     console.log(`👤 Usuario autenticado: ${email}, Rol: ${role}`);
-    crearMenuNavegacion();  // Añadimos el menú
+    crearMenuNavegacion();
 
-    // Cargar contenidos
     fetchContents();
 
-    // Si es administrador, agregamos botones de gestión
     if (role === "ADMIN") {
         const adminPanel = document.createElement("div");
         adminPanel.classList.add("admin-panel");
@@ -30,7 +18,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Función para crear el menú de navegación
 function crearMenuNavegacion() {
     const nav = document.createElement("nav");
     nav.classList.add("navbar");
@@ -41,7 +28,6 @@ function crearMenuNavegacion() {
     `;
     document.body.insertBefore(nav, document.body.firstChild);
 
-    // Evento para cerrar sesión
     document.getElementById("logout-btn").addEventListener("click", () => {
         localStorage.clear();
         window.location.href = "./login.html";
@@ -62,6 +48,26 @@ async function fetchContents() {
     }
 }
 
+async function getLoggedUser() {
+    try {
+        const res = await fetch("http://localhost:8080/api/auth/me", {
+            method: "GET",
+            credentials: "include"
+        });
+
+        if (!res.ok) {
+            window.location.href = "login.html";
+
+            return;
+        }
+
+        return await res.json();
+
+    } catch (error) {
+        console.error(error);
+        window.location.href = "login.html";
+    }
+}
 function displayContents(contents) {
     const carousel = document.getElementById("content-carousel");
     carousel.innerHTML = "";
