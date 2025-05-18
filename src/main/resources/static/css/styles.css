@@ -1,115 +1,59 @@
-/* =====================
-   🎨 Global Styles
-===================== */
+/* =======================
+   Global Styles
+========================== */
+
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
-    font-family: 'Arial', sans-serif;
     background-color: #141414;
-    color: #fff;
+    color: white;
+    font-family: Arial, sans-serif;
 }
 
-/* =====================
-   🔐 Login & Register Styles
-===================== */
-.container {
+.navbar {
+    background-color: #111;
+    padding: 15px 30px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    height: 100vh;
-    width: 100%;
 }
 
-.login-container {
-    max-width: 400px;
-    width: 100%;
-    background-color: #333;
-    padding: 20px;
-    border-radius: 8px;
-    color: white;
-    text-align: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-    position: relative;
-}
-
-.login-container h2 {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-
-.login-container input,
-.login-container select {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 4px;
-    border: none;
-    background-color: #444;
-    color: white;
-}
-
-.login-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #e50914;
-    border: none;
-    color: white;
+.navbar .brand {
+    font-size: 24px;
     font-weight: bold;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-    margin-bottom: 15px;
+    color: #e50914;
 }
 
-.login-container button:hover {
-    background-color: #b20610;
-}
-
-/* =====================
-   🔗 Action Buttons
-===================== */
-.action-buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.btn-back {
-    display: inline-block;
-    padding: 8px 16px;
-    background-color: #444;
-    border-radius: 4px;
+.navbar nav a {
     color: white;
+    margin-left: 20px;
     text-decoration: none;
     font-weight: bold;
-    transition: background-color 0.3s;
-    text-align: center;
 }
 
-.btn-back:hover {
-    background-color: #555;
+.section {
+    padding: 20px 30px;
 }
 
-/* =====================
-   🔄 Error Messages
-===================== */
-#error-message {
-    color: red;
+.section h2 {
+    border-bottom: 2px solid #e50914;
+    padding-bottom: 5px;
+}
+
+.highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
     margin-top: 10px;
 }
 
-/* =====================
-   📱 Responsive Design
-===================== */
-@media (max-width: 768px) {
-    .login-container {
-        max-width: 90%;
-    }
+.highlight-card {
+    background-color: #222;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
 
-    .action-buttons {
-        flex-direction: column;
-    }
+.highlight-card:hover {
+    transform: scale(1.05);
 }

@@ -1,14 +1,14 @@
 // login.js
 window.addEventListener("DOMContentLoaded", () => {
-    console.log("✅ Script login.js cargado correctamente");
+    console.log(" Script login.js cargado correctamente");
 
     const form = document.getElementById("login-form");
     if (form) {
-        console.log("✅ Formulario encontrado");
+        console.log(" Formulario encontrado");
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            console.log("🔥 Evento submit capturado correctamente");
+            console.log(" Evento submit capturado correctamente");
 
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
@@ -26,25 +26,26 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log("🔑 Datos recibidos:", data);
+                    console.log(" Datos recibidos:", data);
 
                     localStorage.setItem("token", data.token || "token_placeholder");
                     localStorage.setItem("role", data.role || "USER");
                     localStorage.setItem("email", email);
 
                     alert(`Bienvenido, ${data.role}`);
-                    window.location.href = "./index.html";
+                    window.location.href = "index.html";
+
                 } else {
                     const errorMessage = await response.text();
-                    console.log("❌ Error en la autenticación:", response.status, errorMessage);
+                    console.log(" Error en la autenticación:", response.status, errorMessage);
                     document.getElementById("error-message").innerText = "Usuario o contraseña incorrectos.";
                 }
             } catch (error) {
-                console.error("🚨 Error al iniciar sesión:", error);
+                console.error(" Error al iniciar sesión:", error);
                 document.getElementById("error-message").innerText = "Error en el servidor.";
             }
         });
     } else {
-        console.error("🚨 El formulario no se encontró en el DOM");
+        console.error(" El formulario no se encontró en el DOM");
     }
 });

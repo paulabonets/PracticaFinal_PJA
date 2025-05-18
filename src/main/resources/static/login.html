@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Login | Netflix Clone</title>
@@ -8,15 +8,18 @@
 <body>
 <div class="login-container">
     <h2>Iniciar Sesión</h2>
+
     <form id="login-form">
         <input type="text" id="email" placeholder="Correo Electrónico" required>
         <input type="password" id="password" placeholder="Contraseña" required>
         <button type="submit">Entrar</button>
     </form>
+
     <div class="action-buttons">
         <a href="register.html" class="btn-back">Si no tienes cuenta, regístrate aquí</a>
     </div>
-    <div id="error-message"></div>
+
+    <div id="error-message" style="color: red; margin-top: 10px;"></div>
 </div>
 
 <script src="js/login.js"></script>
