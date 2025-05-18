@@ -18,21 +18,20 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-function crearMenuNavegacion() {
-    const nav = document.createElement("nav");
-    nav.classList.add("navbar");
-    nav.innerHTML = `
-        <a href="./index.html">Inicio</a>
-        <a href="./register.html">Registrar Usuario</a>
-        <a href="#" id="logout-btn">Cerrar Sesión</a>
-    `;
-    document.body.insertBefore(nav, document.body.firstChild);
+document.querySelector("a#logout").addEventListener("click", async (e) => {
+    e.preventDefault();
 
-    document.getElementById("logout-btn").addEventListener("click", () => {
-        localStorage.clear();
-        window.location.href = "./login.html";
-    });
-}
+    try {
+        await fetch("http://localhost:8080/api/auth/logout", {
+            method: "POST",
+            credentials: "include"
+        });
+
+        window.location.href = "login.html";
+    } catch (error) {
+        console.error("Error al cerrar sesión:", error);
+    }
+});
 
 async function fetchContents() {
     try {

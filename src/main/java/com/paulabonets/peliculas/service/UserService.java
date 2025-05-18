@@ -45,6 +45,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public void logout(String session) {
+        userRepository.findBySession(session).ifPresent(user -> {
+            user.setSession(null);
+            userRepository.save(user);
+        });
+    }
+
     public Optional<User> getUserBySession(String session) {
         return userRepository.findBySession(session);
     }
