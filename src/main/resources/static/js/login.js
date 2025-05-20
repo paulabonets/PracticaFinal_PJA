@@ -1,18 +1,14 @@
-// login.js
 window.addEventListener("DOMContentLoaded", () => {
-    console.log(" Script login.js cargado correctamente");
 
     const form = document.getElementById("login-form");
     const errorContainer = document.getElementById("error-message");
 
     if (!form) {
-        console.error("🚨 El formulario no se encontró en el DOM");
         return;
     }
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        console.log("🔥 Evento submit capturado correctamente");
 
         const email = document.getElementById("email")?.value.trim();
         const password = document.getElementById("password")?.value;
@@ -50,11 +46,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 window.location.href = "./home.html";
             } else {
-                console.warn("❌ Error en la autenticación:", data);
-                errorContainer.innerText = "Usuario o contraseña incorrectos.";
+                console.warn("Auth error:", data);
+                errorContainer.innerText = "Email o contraseña incorrectos.";
             }
         } catch (error) {
-            console.error("🚨 Error en la solicitud:", error);
+            console.error("🚨 Request Error:", error);
             errorContainer.innerText = "No se pudo conectar al servidor.";
         }
     });

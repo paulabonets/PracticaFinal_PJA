@@ -23,7 +23,6 @@ public class WishListItemController {
     @Autowired
     private SessionHelper sessionHelper;
 
-
     @GetMapping
     public List<Content> getWishlist(@CookieValue("session") String session) {
         User user = sessionHelper.getUserFromSession(session);
