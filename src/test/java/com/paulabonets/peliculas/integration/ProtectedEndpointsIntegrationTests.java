@@ -38,7 +38,7 @@ public class ProtectedEndpointsIntegrationTests {
             }
             """.formatted(NAME, EMAIL, PASSWORD);
 
-        client.exchange("https://jpa-1-bo8z.onrender.com/api/auth/register",
+        client.exchange("http://localhost:8080/api/auth/register",
                 HttpMethod.POST, new HttpEntity<>(json, headers), String.class);
 
         // 2. Login
@@ -49,7 +49,7 @@ public class ProtectedEndpointsIntegrationTests {
             }
             """.formatted(EMAIL, PASSWORD);
 
-        ResponseEntity<String> response = client.exchange("https://jpa-1-bo8z.onrender.com/api/auth/login",
+        ResponseEntity<String> response = client.exchange("http://localhost:8080/api/auth/login",
                 HttpMethod.POST, new HttpEntity<>(loginJson, headers), String.class);
 
         // 3. Captura la cookie de sesión
@@ -61,7 +61,7 @@ public class ProtectedEndpointsIntegrationTests {
     @Test
     public void getMe_returnsUserInfo() {
         ResponseEntity<String> response = client.exchange(
-                "https://jpa-1-bo8z.onrender.com/api/auth/me",
+                "http://localhost:8080/api/auth/me",
                 HttpMethod.GET,
                 new HttpEntity<>(null, cookieHeaders),
                 String.class
@@ -74,7 +74,7 @@ public class ProtectedEndpointsIntegrationTests {
     @Test
     public void logout_removesSession() {
         ResponseEntity<String> response = client.exchange(
-                "https://jpa-1-bo8z.onrender.com/api/auth/logout",
+                "http://localhost:8080/api/auth/logout",
                 HttpMethod.POST,
                 new HttpEntity<>(null, cookieHeaders),
                 String.class
@@ -87,7 +87,7 @@ public class ProtectedEndpointsIntegrationTests {
     public void getMe_withoutLogin_returnsUnauthorized() {
         // No incluimos la cookie de sesión
         ResponseEntity<String> response = client.exchange(
-                "https://jpa-1-bo8z.onrender.com/api/auth/me",
+                "http://localhost:8080/api/auth/me",
                 HttpMethod.GET,
                 new HttpEntity<>(null, new HttpHeaders()), // sin cookies
                 String.class
@@ -100,7 +100,7 @@ public class ProtectedEndpointsIntegrationTests {
     public void logout_thenGetMe_returnsUnauthorized() {
         // 1. Hacemos logout
         client.exchange(
-                "https://jpa-1-bo8z.onrender.com/api/auth/logout",
+                "http://localhost:8080/api/auth/logout",
                 HttpMethod.POST,
                 new HttpEntity<>(null, cookieHeaders),
                 String.class
@@ -108,7 +108,7 @@ public class ProtectedEndpointsIntegrationTests {
 
         // 2. Intentamos acceder a /me con la cookie antigua
         ResponseEntity<String> response = client.exchange(
-                "https://jpa-1-bo8z.onrender.com/api/auth/me",
+                "http://localhost:8080/api/auth/me",
                 HttpMethod.GET,
                 new HttpEntity<>(null, cookieHeaders),
                 String.class
@@ -132,7 +132,7 @@ public class ProtectedEndpointsIntegrationTests {
         HttpEntity<String> request = new HttpEntity<>(loginJson, headers);
 
         ResponseEntity<String> response = client.postForEntity(
-                "https://jpa-1-bo8z.onrender.com/api/auth/login",
+                "http://localhost:8080/api/auth/login",
                 request,
                 String.class
         );
