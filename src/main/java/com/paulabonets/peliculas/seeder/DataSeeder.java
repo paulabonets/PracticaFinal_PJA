@@ -1,10 +1,14 @@
 package com.paulabonets.peliculas.seeder;
 
+import com.paulabonets.peliculas.enums.Rol;
 import com.paulabonets.peliculas.enums.TypeContent;
 import com.paulabonets.peliculas.model.Book;
 import com.paulabonets.peliculas.model.Movie;
+import com.paulabonets.peliculas.model.User;
 import com.paulabonets.peliculas.repository.BookRepository;
 import com.paulabonets.peliculas.repository.MovieRepository;
+import com.paulabonets.peliculas.repository.UserRepository;
+import com.paulabonets.peliculas.util.Hashing;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -22,10 +26,14 @@ import java.util.List;
 public class DataSeeder implements CommandLineRunner {
     private BookRepository bookRepository;
     private MovieRepository movieRepository;
+    private UserRepository userRepository;
+    private Hashing hashing;
 
-    public DataSeeder(BookRepository bookRepository, MovieRepository movieRepository) {
+    public DataSeeder(BookRepository bookRepository, MovieRepository movieRepository, Hashing hashing, UserRepository userRepository) {
         this.bookRepository = bookRepository;
         this.movieRepository = movieRepository;
+        this.userRepository = userRepository;
+        this.hashing = hashing;
     }
 
     @Override
@@ -37,6 +45,8 @@ public class DataSeeder implements CommandLineRunner {
         if (movieRepository.count() == 0) {
             seedMovies();
         }
+
+        userRepository.save(new User("Admin", "admin@gmail.com", hashing.hash("admin123") ,Rol.ADMIN));
     }
 
     private void seedBooks() {

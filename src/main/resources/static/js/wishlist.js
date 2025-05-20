@@ -2,6 +2,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     const user = await getLoggedUser();
     if (!user) return;
 
+    if (user.rol === "ADMIN") { window.location.href = "/home.html"; }
+
     await loadWishlist();
 });
 
