@@ -28,6 +28,15 @@ public class User {
     @Column(unique = true)
     private String session;
 
+    public User(String name, String email, String password, Rol rol) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.rol = rol;
+    }
+
+    public User() {}
+
     public String getSession() {
         return session;
     }

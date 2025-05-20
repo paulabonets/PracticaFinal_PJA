@@ -57,6 +57,7 @@ public class AuthController {
         User user = sessionHelper.getUserFromSession(session);
 
         return ResponseEntity.ok(Map.of(
+                "id", user.getId(),
                 "email", user.getEmail(),
                 "name", user.getName(),
                 "rol", user.getRol().name()

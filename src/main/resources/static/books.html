@@ -12,13 +12,49 @@
         <li><a href="home.html">Inicio</a></li>
         <li><a href="movies.html">Películas</a></li>
         <li><a href="books.html">Libros</a></li>
-        <li><a href="wishList.html">Wish List</a></li>
+        <li id="wishListNav"><a href="wishList.html">Wish List</a></li>
         <li style="margin-left: auto; margin-right: 1rem; "><a href="" id="logout">Cerrar sesión</a></li>
     </ul>
 </nav>
 
 <main>
-    <h2 id="page-title">Libros</h2>
+    <div style="display: flex; justify-content: space-between">
+        <h2 id="page-title">Libros</h2>
+
+        <button id="create-content-btn" style="display: none;">Crear Libro</button>
+
+        <div id="create-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span id="close-modal" class="close">&times;</span>
+                <h3 id="modal-title">Crear Libro</h3>
+                <form id="create-form">
+                    <label for="">Título</label>
+                    <input type="text" id="new-title" placeholder="Título" required /><br />
+
+                    <label for="">Descripción</label>
+                    <input type="text" id="new-description" placeholder="Descripción" required /><br />
+
+                    <label for="">Género</label>
+                    <input type="text" id="new-genre" placeholder="Género" required /><br />
+
+                    <label for="">Fecha de estreno</label>
+                    <input type="date" id="new-release" required /><br />
+
+                    <label for="">Imágen</label>
+                    <input type="file" id="new-image" accept="image/*" required /><br />
+
+                    <label for="">Autor</label>
+                    <input type="text" id="new-author" placeholder="Autor" required /><br />
+
+                    <label for="">ISBN</label>
+                    <input type="text" id="new-isbn" placeholder="ISBN" required /><br />
+
+                    <button type="submit">Crear</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <input type="text" id="search-bar" placeholder="Buscar por título..." />
     <p id="books-empty" class="empty-message" style="display: none;">No se encontraron libros.</p>
     <div class="cards-container" id="books-container"></div>

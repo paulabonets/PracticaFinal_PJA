@@ -1,5 +1,6 @@
 package com.paulabonets.peliculas.service;
 
+import com.paulabonets.peliculas.enums.Rol;
 import com.paulabonets.peliculas.model.Content;
 import com.paulabonets.peliculas.model.Review;
 import com.paulabonets.peliculas.model.User;
@@ -40,8 +41,15 @@ public class ReviewService {
     }
 
     public void deleteReview(Long id, User user) {
-        Review review = reviewRepository.findByIdAndUser(id, user)
-                .orElseThrow(() -> new RuntimeException("You can't delete this review"));
+        Review review;
+
+        if (user.getRol() == Rol.ADMIN) {
+            review = reviewRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Review not found"));
+        } else {
+            review = reviewRepository.findByIdAndUser(id, user)
+                    .orElseThrow(() -> new RuntimeException("You cant not delete this review"));
+        }
 
         reviewRepository.delete(review);
     }
