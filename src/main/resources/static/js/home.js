@@ -2,6 +2,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     const user = await getLoggedUser();
     if (!user) return;
 
+    if (user.rol === "ADMIN") { document.getElementById("wishListNav").remove() }
+
     try {
         const response = await fetch("http://localhost:8080/api/content", {
             credentials: "include"

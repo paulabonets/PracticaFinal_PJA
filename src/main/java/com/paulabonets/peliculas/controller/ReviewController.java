@@ -63,7 +63,7 @@ public class ReviewController {
             r.put("stars", review.getStars());
             r.put("createdAt", review.getCreated_at());
             r.put("userName", review.getUser().getName());
-
+            r.put("userId", review.getUser().getId());
             return r;
         }).toList();
     }
