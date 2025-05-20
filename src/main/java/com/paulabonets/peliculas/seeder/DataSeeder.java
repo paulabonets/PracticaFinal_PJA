@@ -13,6 +13,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -109,12 +110,15 @@ public class DataSeeder implements CommandLineRunner {
     }
 
     private String encodeImageFromFile(String relativePath) {
-        try {
-            Path path = Paths.get("src/main/resources/images/" + relativePath);
-            byte[] bytes = Files.readAllBytes(path);
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("images/" + relativePath)) {
+            if (is == null) {
+                throw new RuntimeException("No se pudo encontrar la imagen " + relativePath + " en el classpath");
+            }
+            byte[] bytes = is.readAllBytes();
             return Base64.getEncoder().encodeToString(bytes);
         } catch (IOException e) {
             throw new RuntimeException("No se pudo leer la imagen " + relativePath, e);
         }
     }
+
 }
