@@ -13,11 +13,6 @@ Este proyecto es una aplicación web que permite gestionar un catálogo de libro
 
 ---
 
-## Url de la aplicación en producción
-Link: https://jpa-1-bo8z.onrender.com
-
----
-
 ## 📂 Estructura del Proyecto
 
 **`src/main/java/com/paulabonets/peliculas/`**
