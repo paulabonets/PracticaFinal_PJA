@@ -79,5 +79,9 @@ public class AuthController {
         return ResponseEntity.ok("Closed session");
     }
 
+    @ExceptionHandler({RuntimeException.class})
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+    }
 
 }

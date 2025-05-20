@@ -4,7 +4,9 @@ import com.paulabonets.peliculas.model.User;
 import com.paulabonets.peliculas.repository.UserRepository;
 import com.paulabonets.peliculas.util.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
 import java.util.Optional;
@@ -34,10 +36,10 @@ public class UserService {
 
     public User login(String email, String password) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("El usuario no existe"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "El usuario no existe"));
 
         if (!hashingUtil.compare(user.getPassword(), password)) {
-            throw new RuntimeException("La contraseña no coincide");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "La contraseña no coincide");
         }
 
         user.setSession(UUID.randomUUID().toString());
