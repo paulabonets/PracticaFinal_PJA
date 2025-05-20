@@ -15,20 +15,25 @@ Este proyecto es una aplicación web que permite gestionar un catálogo de libro
 
 ## 📂 Estructura del Proyecto
 
-src/
-│
-├── main/
-│ ├── java/com/paulabonets/peliculas/
-│ │ ├── controller/ ← Controladores REST
-│ │ ├── model/ ← Entidades JPA
-│ │ ├── repository/ ← Interfaces JPA
-│ │ ├── service/ ← Lógica de negocio
-│ │ ├── util/ ← Clases de utilidad
-│ │ ├── records/ ← DTOs
-│ │ └── seeder/ ← Datos iniciales
-│ └── resources/static/ ← HTML, CSS, JS (frontend)
-└── test/
-└── ... ← Pruebas unitarias, E2E
+**`src/main/java/com/paulabonets/peliculas/`**
+- `controller/` → Controladores REST
+- `model/` → Entidades JPA
+- `repository/` → Interfaces JPA (acceso a datos)
+- `service/` → Lógica de negocio
+- `util/` → Clases de utilidad (helpers)
+- `records/` → Clases DTO (para login, registro, etc.)
+- `seeder/` → Carga inicial de datos (admin, libros, pelis)
+
+**`src/main/resources/static/`**
+- `index.html` → Página principal (catálogo)
+- `login.html` → Inicio de sesión
+- `register.html` → Registro
+- Archivos CSS y JS
+
+**`src/test/java/com/paulabonets/peliculas/`**
+- `unit/` → Pruebas unitarias
+- `integration/` → Tests de integración
+- `e2e/` → Pruebas end-to-end
 
 ---
 
