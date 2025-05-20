@@ -26,7 +26,6 @@ public class MovieService {
                 existingMovie.setDescription(movie.getDescription());
                 existingMovie.setRelease_date(movie.getRelease_date());
                 existingMovie.setGenre(movie.getGenre());
-                existingMovie.setImageBase64(movie.getImageBase64());
                 existingMovie.setDirector(movie.getDirector());
                 existingMovie.setDuration(movie.getDuration());
 

@@ -28,7 +28,6 @@ public class BookService {
                 existingMovie.setDescription(book.getDescription());
                 existingMovie.setRelease_date(book.getRelease_date());
                 existingMovie.setGenre(book.getGenre());
-                existingMovie.setImageBase64(book.getImageBase64());
                 existingMovie.setAuthor(book.getAuthor());
                 existingMovie.setIsbn(book.getIsbn());
 

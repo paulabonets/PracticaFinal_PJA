@@ -120,9 +120,13 @@ li a {
 }
 
 #reviews-container {
-    max-height: 20rem;
+    max-height: 17rem;
     overflow-y: auto;
     padding-right: 0.5rem;
+}
+
+.extended-reviews-container {
+    max-height: 37rem !important;
 }
 
 .review {
@@ -199,6 +203,37 @@ li a {
     background-color: green;
 }
 
+#edit-content-btn {
+    width: 10rem;
+    height: 2rem;
+    border: 1px solid black;
+    border-radius: 0.7rem;
+    background-color: yellow;
+    color: black;
+}
+
 h2 {
     margin-top: 2rem;
+}
+
+.delete-review-btn {
+    background-color: red;
+    color: white;
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#delete-content-btn {
+    background-color: red;
+    color: white;
+    border: 1px solid black;
+    border-radius: 0.7rem;
+    padding: 0.5rem 1rem;
+    height: 2rem;
 }
