@@ -15,12 +15,12 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
         });
 
         if (response.ok) {
-            alert("Usuario registrado correctamente");
+            console.log("Usuario registrado correctamente");
             window.location.href = "./../home.html";
         } else if (response.status === 409) {
-            alert("El correo ya está en uso");
+            console.log("El correo ya está en uso");
         } else {
-            alert("Error al registrar el usuario");
+            console.log("Error al registrar el usuario");
         }
     } catch (error) {
         console.error("Error en el registro:", error);

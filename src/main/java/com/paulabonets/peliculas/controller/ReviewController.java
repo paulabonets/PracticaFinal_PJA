@@ -14,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -45,13 +47,25 @@ public class ReviewController {
     }
 
     @GetMapping("/content/{id}")
-    public List<Review> getContentUserReviews(@PathVariable Long id, @CookieValue(value = "session", required = true) String session) {
+    public List<Map<String, Object>> getContentUserReviews(
+            @PathVariable Long id,
+            @CookieValue(value = "session", required = true) String session
+    ) {
         sessionHelper.getUserFromSession(session);
 
         Content content = contentService.getById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found"));;
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found"));
 
-        return reviewService.getContentUserReviews(content);
+        return reviewService.getContentUserReviews(content).stream().map(review -> {
+            Map<String, Object> r = new HashMap<>();
+            r.put("id", review.getId());
+            r.put("description", review.getDescription());
+            r.put("stars", review.getStars());
+            r.put("createdAt", review.getCreated_at());
+            r.put("userName", review.getUser().getName());
+
+            return r;
+        }).toList();
     }
 
     @GetMapping("/{id}")

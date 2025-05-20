@@ -16,17 +16,18 @@ public class Content {
     private String description;
     private Date release_date;
     private String genre;
-    private String imageUrl;
+    @Column(columnDefinition = "TEXT")
+    private String imageBase64;
 
     @Enumerated(EnumType.STRING)
     private TypeContent type;
 
-    public Content(String title, String description, Date release_date, String genre, String imageUrl, TypeContent type) {
+    public Content(String title, String description, Date release_date, String genre, String imageBase64, TypeContent type) {
         this.title = title;
         this.description = description;
         this.release_date = release_date;
         this.genre = genre;
-        this.imageUrl = imageUrl;
+        this.imageBase64 = imageBase64;
         this.type = type;
     }
 
@@ -40,12 +41,12 @@ public class Content {
         this.id = id;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageBase64() {
+        return imageBase64;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageBase64(String imageBase64) {
+        this.imageBase64 = imageBase64;
     }
 
     public String getTitle() {
