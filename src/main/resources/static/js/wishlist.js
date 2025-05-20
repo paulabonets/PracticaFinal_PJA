@@ -9,7 +9,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 async function loadWishlist() {
     try {
-        const res = await fetch("http://localhost:8080/api/wishlist", {
+        const res = await fetch("https://jpa-1-bo8z.onrender.com/api/wishlist", {
             credentials: "include"
         });
 

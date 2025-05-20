@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         logoutLink.addEventListener("click", async (e) => {
             e.preventDefault();
             try {
-                await fetch("http://localhost:8080/api/auth/logout", {
+                await fetch("https://jpa-1-bo8z.onrender.com/api/auth/logout", {
                     method: "POST",
                     credentials: "include"
                 });
@@ -24,7 +24,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 async function getLoggedUser() {
     try {
-        const res = await fetch("http://localhost:8080/api/auth/me", {
+        const res = await fetch("https://jpa-1-bo8z.onrender.com/api/auth/me", {
             method: "GET",
             credentials: "include"
         });

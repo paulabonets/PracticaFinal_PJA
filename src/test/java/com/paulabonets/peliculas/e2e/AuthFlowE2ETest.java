@@ -35,7 +35,7 @@ public class AuthFlowE2ETest {
             """.formatted(NAME, EMAIL, PASSWORD);
 
         ResponseEntity<String> registerResponse = client.exchange(
-                "http://localhost:8080/api/auth/register",
+                "https://jpa-1-bo8z.onrender.com/api/auth/register",
                 HttpMethod.POST,
                 new HttpEntity<>(registerJson, headers),
                 String.class
@@ -52,7 +52,7 @@ public class AuthFlowE2ETest {
             """.formatted(EMAIL, PASSWORD);
 
         ResponseEntity<String> loginResponse = client.exchange(
-                "http://localhost:8080/api/auth/login",
+                "https://jpa-1-bo8z.onrender.com/api/auth/login",
                 HttpMethod.POST,
                 new HttpEntity<>(loginJson, headers),
                 String.class
@@ -67,7 +67,7 @@ public class AuthFlowE2ETest {
 
         // 4. Get Me
         ResponseEntity<String> meResponse = client.exchange(
-                "http://localhost:8080/api/auth/me",
+                "https://jpa-1-bo8z.onrender.com/api/auth/me",
                 HttpMethod.GET,
                 new HttpEntity<>(null, cookieHeaders),
                 String.class

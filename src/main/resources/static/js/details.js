@@ -36,7 +36,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 async function loadContentDetails(id) {
     try {
-        const res = await fetch(`http://localhost:8080/api/content/${id}`, {
+        const res = await fetch(`https://jpa-1-bo8z.onrender.com/api/content/${id}`, {
             credentials: "include"
         });
         const content = await res.json();
@@ -84,7 +84,7 @@ async function loadContentDetails(id) {
 
 async function loadReviews(contentId) {
     try {
-        const res = await fetch(`http://localhost:8080/api/reviews/content/${contentId}`, {
+        const res = await fetch(`https://jpa-1-bo8z.onrender.com/api/reviews/content/${contentId}`, {
             credentials: "include"
         });
 
@@ -139,7 +139,7 @@ async function loadReviews(contentId) {
 
 async function deleteReview(reviewId, contentId) {
     try {
-        const res = await fetch(`http://localhost:8080/api/reviews/${reviewId}`, {
+        const res = await fetch(`https://jpa-1-bo8z.onrender.com/api/reviews/${reviewId}`, {
             method: "DELETE",
             credentials: "include"
         });
@@ -165,7 +165,7 @@ function setupReviewForm(contentId) {
         const reviewText = document.getElementById("descriptionReview").value;
 
         try {
-            const res = await fetch("http://localhost:8080/api/reviews", {
+            const res = await fetch("https://jpa-1-bo8z.onrender.com/api/reviews", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -194,7 +194,7 @@ async function setupWishlist(contentId) {
     let isInWishlist = false;
 
     try {
-        const res = await fetch("http://localhost:8080/api/wishlist", {
+        const res = await fetch("https://jpa-1-bo8z.onrender.com/api/wishlist", {
             credentials: "include"
         });
 
@@ -210,7 +210,7 @@ async function setupWishlist(contentId) {
             try {
                 const method = isInWishlist ? "DELETE" : "POST";
 
-                const response = await fetch(`http://localhost:8080/api/wishlist/${contentId}`, {
+                const response = await fetch(`https://jpa-1-bo8z.onrender.com/api/wishlist/${contentId}`, {
                     method,
                     credentials: "include"
                 });
@@ -246,7 +246,7 @@ async function removeContentListener() {
     if (!confirmDelete) return;
 
     try {
-        const res = await fetch(`http://localhost:8080/api/content/${currentContent.id}`, {
+        const res = await fetch(`https://jpa-1-bo8z.onrender.com/api/content/${currentContent.id}`, {
             method: "DELETE",
             credentials: "include"
         });
@@ -350,7 +350,7 @@ async function saveChanges() {
     }
 
     try {
-        const res = await fetch(`http://localhost:8080/api/${currentContent.type.toLowerCase()}s/${id}`, {
+        const res = await fetch(`https://jpa-1-bo8z.onrender.com/api/${currentContent.type.toLowerCase()}s/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

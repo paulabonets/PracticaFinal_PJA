@@ -139,14 +139,14 @@ Herramientas: JUnit 5, TestRestTemplate, assertions nativas
 
 1. Clona el repositorio
 2. Ejecuta con Maven o desde tu IDE
-3. Accede a [http://localhost:8080](http://localhost:8080)
+3. Accede a [https://jpa-1-bo8z.onrender.com](https://jpa-1-bo8z.onrender.com)
 4. Login admin: `admin@admin.com` / `admin`
 
 ---
 
 ## 👩‍💻 Equipo de desarrollo
 
-- **Joel** – Backend principal
+- **Joel** – Backend, frontend y deployment
 - **Alejandra** – Backend, testing y frontend
 - **Paula** – Frontend, testing y documentación
 

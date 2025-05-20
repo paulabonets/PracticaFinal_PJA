@@ -34,7 +34,7 @@ public class ReviewE2ETest {
               "password": "%s"
             }
         """.formatted(NAME, EMAIL, PASSWORD);
-        client.exchange("http://localhost:8080/api/auth/register", HttpMethod.POST, new HttpEntity<>(registerJson, headers), String.class);
+        client.exchange("https://jpa-1-bo8z.onrender.com/api/auth/register", HttpMethod.POST, new HttpEntity<>(registerJson, headers), String.class);
 
         // LOGIN
         String loginJson = """
@@ -43,7 +43,7 @@ public class ReviewE2ETest {
               "password": "%s"
             }
         """.formatted(EMAIL, PASSWORD);
-        ResponseEntity<String> loginResponse = client.exchange("http://localhost:8080/api/auth/login", HttpMethod.POST, new HttpEntity<>(loginJson, headers), String.class);
+        ResponseEntity<String> loginResponse = client.exchange("https://jpa-1-bo8z.onrender.com/api/auth/login", HttpMethod.POST, new HttpEntity<>(loginJson, headers), String.class);
         String cookie = loginResponse.getHeaders().getFirst(HttpHeaders.SET_COOKIE);
 
         HttpHeaders authHeaders = new HttpHeaders();
@@ -60,7 +60,7 @@ public class ReviewE2ETest {
         """;
 
         ResponseEntity<String> postResponse = client.exchange(
-                "http://localhost:8080/api/reviews",
+                "https://jpa-1-bo8z.onrender.com/api/reviews",
                 HttpMethod.POST,
                 new HttpEntity<>(reviewJson, authHeaders),
                 String.class
@@ -69,7 +69,7 @@ public class ReviewE2ETest {
 
         // OBTENER REVIEWS
         ResponseEntity<String> getResponse = client.exchange(
-                "http://localhost:8080/api/reviews/content/1",
+                "https://jpa-1-bo8z.onrender.com/api/reviews/content/1",
                 HttpMethod.GET,
                 new HttpEntity<>(null, authHeaders),
                 String.class

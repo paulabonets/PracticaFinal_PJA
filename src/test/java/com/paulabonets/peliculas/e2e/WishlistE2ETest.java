@@ -35,7 +35,7 @@ public class WishlistE2ETest {
         }
     """.formatted(NAME, EMAIL, PASSWORD);
 
-        client.exchange("http://localhost:8080/api/auth/register",
+        client.exchange("https://jpa-1-bo8z.onrender.com/api/auth/register",
                 HttpMethod.POST,
                 new HttpEntity<>(registerJson, headers),
                 String.class);
@@ -48,7 +48,7 @@ public class WishlistE2ETest {
         }
     """.formatted(EMAIL, PASSWORD);
 
-        ResponseEntity<String> loginResponse = client.exchange("http://localhost:8080/api/auth/login",
+        ResponseEntity<String> loginResponse = client.exchange("https://jpa-1-bo8z.onrender.com/api/auth/login",
                 HttpMethod.POST,
                 new HttpEntity<>(loginJson, headers),
                 String.class);
@@ -59,7 +59,7 @@ public class WishlistE2ETest {
 
         // --- AÑADIR A WISHLIST ---
         ResponseEntity<String> addResponse = client.exchange(
-                "http://localhost:8080/api/wishlist/1",
+                "https://jpa-1-bo8z.onrender.com/api/wishlist/1",
                 HttpMethod.POST,
                 new HttpEntity<>(null, cookieHeaders),
                 String.class
@@ -68,7 +68,7 @@ public class WishlistE2ETest {
 
         // --- VERIFICAR WISHLIST ---
         ResponseEntity<String> wishlistResponse = client.exchange(
-                "http://localhost:8080/api/wishlist",
+                "https://jpa-1-bo8z.onrender.com/api/wishlist",
                 HttpMethod.GET,
                 new HttpEntity<>(null, cookieHeaders),
                 String.class

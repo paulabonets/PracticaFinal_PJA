@@ -35,7 +35,7 @@ public class LogoutE2ETest {
             }
         """.formatted(NAME, EMAIL, PASSWORD);
 
-        client.exchange("http://localhost:8080/api/auth/register",
+        client.exchange("https://jpa-1-bo8z.onrender.com/api/auth/register",
                 HttpMethod.POST,
                 new HttpEntity<>(registerJson, headers),
                 String.class);
@@ -48,7 +48,7 @@ public class LogoutE2ETest {
             }
         """.formatted(EMAIL, PASSWORD);
 
-        ResponseEntity<String> loginResponse = client.exchange("http://localhost:8080/api/auth/login",
+        ResponseEntity<String> loginResponse = client.exchange("https://jpa-1-bo8z.onrender.com/api/auth/login",
                 HttpMethod.POST,
                 new HttpEntity<>(loginJson, headers),
                 String.class);
@@ -58,14 +58,14 @@ public class LogoutE2ETest {
         cookieHeaders.add(HttpHeaders.COOKIE, sessionCookie);
 
         // --- LOGOUT ---
-        ResponseEntity<String> logoutResponse = client.exchange("http://localhost:8080/api/auth/logout",
+        ResponseEntity<String> logoutResponse = client.exchange("https://jpa-1-bo8z.onrender.com/api/auth/logout",
                 HttpMethod.POST,
                 new HttpEntity<>(null, cookieHeaders),
                 String.class);
         Assertions.assertEquals(HttpStatus.OK, logoutResponse.getStatusCode());
 
         // --- INTENTO DE ACCESO TRAS LOGOUT ---
-        ResponseEntity<String> meResponse = client.exchange("http://localhost:8080/api/auth/me",
+        ResponseEntity<String> meResponse = client.exchange("https://jpa-1-bo8z.onrender.com/api/auth/me",
                 HttpMethod.GET,
                 new HttpEntity<>(null, cookieHeaders),
                 String.class);

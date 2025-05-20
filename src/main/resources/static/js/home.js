@@ -5,7 +5,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     if (user.rol === "ADMIN") { document.getElementById("wishListNav").remove() }
 
     try {
-        const response = await fetch("http://localhost:8080/api/content", {
+        const response = await fetch("https://jpa-1-bo8z.onrender.com/api/content", {
             credentials: "include"
         });
         const allContent = await response.json();
