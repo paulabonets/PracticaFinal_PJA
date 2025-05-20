@@ -1,4 +1,5 @@
 package com.paulabonets.peliculas.model;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.paulabonets.peliculas.enums.Rol;
 import com.paulabonets.peliculas.model.Review;
 import com.paulabonets.peliculas.model.WishListItem;
@@ -23,12 +24,6 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Rol rol;
-
-    @OneToMany(mappedBy = "user")
-    private List<Review> reviews;
-
-    @OneToMany(mappedBy = "user")
-    private List<WishListItem> wishList;
 
     @Column(unique = true)
     private String session;
@@ -81,20 +76,5 @@ public class User {
         this.rol = rol;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    public List<WishListItem> getWishList() {
-        return wishList;
-    }
-
-    public void setWishList(List<WishListItem> wishList) {
-        this.wishList = wishList;
-    }
 
 }

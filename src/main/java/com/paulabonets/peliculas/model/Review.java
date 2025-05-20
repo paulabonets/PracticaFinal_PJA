@@ -1,5 +1,6 @@
 package com.paulabonets.peliculas.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.paulabonets.peliculas.model.Content;
 import jakarta.persistence.*;
 import org.springframework.cglib.core.Local;
@@ -14,6 +15,7 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonManagedReference
     private User user;
 
     @ManyToOne
@@ -21,6 +23,7 @@ public class Review {
     private Content content;
 
     private Integer stars;
+    @Column(columnDefinition = "TEXT")
     private String description;
     private LocalDate created_at;
 
